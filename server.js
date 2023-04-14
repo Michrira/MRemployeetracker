@@ -57,11 +57,10 @@ function startApp() {
                 case "Exit":
                     console.log("Goodbye!");
                     process.exit();
-                    break;
                 default:
                     console.log(`Invalid action: ${answer.action}`);
-                    startApp();
-            }
+                    startApp(); 
+            } 
         });
 }
 
@@ -102,13 +101,13 @@ function viewAllEmployees() {
     });
 }
 
-// Connect to database and start the application
+/* // Connect to database and start the application
 db.connect(function (err) {
     if (err) throw err;
     console.log("Connected to the database.");
     startApp();
-});
-function viewAllEmployees() {
+});  */
+/*function viewAllEmployees() {
     // Query the database for all employees
     db.query(`SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id LEFT JOIN employee manager ON employee.manager_id = manager.id`, function (err, employees) {
         if (err) throw err;
@@ -318,12 +317,12 @@ function updateEmployeeRole() {
                         function (err, result) {
                             if (err) throw err;
                             console.log("Employee role updated successfully!");
-                            start();
+                            startApp();
                         }
                     );
                 });
         });
     });
-}
+}*/
 
 startApp();
