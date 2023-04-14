@@ -14,7 +14,7 @@ const db = mysql.createConnection(
 // Start the application
 function startApp() {
     // Prompt user for action to perform
-    inquirer.prompt({
+    inquirer.prompt([{
         name: "action",
         type: "list",
         message: "What would you like to do?",
@@ -29,7 +29,7 @@ function startApp() {
             "Exit",
         ],
     
-    })
+    }])
         .then((answer) => {
             // Call the appropriate function based on user choice
             switch (answer.action) {
@@ -61,7 +61,7 @@ function startApp() {
                     console.log(`Invalid action: ${answer.action}`);
                     startApp(); 
             } 
-        });
+        }).catch((err) => console.log(err))
 }
 
 // Function to view all departments
@@ -101,13 +101,13 @@ function viewAllEmployees() {
     });
 }
 
-/* // Connect to database and start the application
+ // Connect to database and start the application
 db.connect(function (err) {
     if (err) throw err;
     console.log("Connected to the database.");
     startApp();
-});  */
-/*function viewAllEmployees() {
+});  
+function viewAllEmployees() {
     // Query the database for all employees
     db.query(`SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id LEFT JOIN employee manager ON employee.manager_id = manager.id`, function (err, employees) {
         if (err) throw err;
@@ -323,6 +323,6 @@ function updateEmployeeRole() {
                 });
         });
     });
-}*/
+}
 
 startApp();
