@@ -7,10 +7,10 @@ const db = mysql.createConnection(
         host: "localhost",
         user: "root",
         password: "imthebest",
-        database: "employees_db"
+        database: "employee_db"
     },
-    console.log(`Connected to the employees_db database.`)
-);
+    console.log(`Connected to the employee_db database.`)
+); 
 // Start the application
 function startApp() {
     // Prompt user for action to perform
@@ -102,11 +102,11 @@ function viewAllEmployees() {
 }
 
  // Connect to database and start the application
-db.connect(function (err) {
+/* db.connect(function (err) {
     if (err) throw err;
     console.log("Connected to the database.");
     startApp();
-});  
+});    */
 function viewAllEmployees() {
     // Query the database for all employees
     db.query(`SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id LEFT JOIN employee manager ON employee.manager_id = manager.id`, function (err, employees) {
