@@ -75,7 +75,7 @@ connection.query(query, (err, res) => {
     if (err) throw err;
     console.log(res);
     console.table(res);
-    mainPrompt();
+    return mainPrompt();
   });
 }
 //function to view all roles
@@ -85,8 +85,8 @@ function viewAllRoles() {
   connection.query(query, (err, res) => {
     console.log(res);
     console.table(res);
-    mainPrompt();
-  })
+    return mainPrompt();
+  });
 }
 
 function viewAllEmployees() {
@@ -104,7 +104,7 @@ function viewAllEmployees() {
   connection.query(query, (err, res) => {
     if (err) throw err;
     console.table(res);
-    mainPrompt();
+    return mainPrompt();
   });
 }
 
@@ -125,7 +125,7 @@ function addDepartment() {
         } else {
           console.log(`Added ${answer.name} to departments`);
         }
-        mainPrompt();
+        return mainPrompt();
       });
     })
     .catch((error) => {
@@ -162,7 +162,7 @@ function addRole() {
         } else {
           console.log(`${res.affectedRows} role inserted!\n`);
         }
-        mainPrompt();
+        return mainPrompt();
       });
     })
     .catch((error) => {
@@ -229,7 +229,7 @@ function addEmployee() {
           } else {
             console.log(`Added ${answers.first_name} ${answers.last_name} to employees`);
           }
-          mainPrompt();
+          return mainPrompt();
         });
       }).catch((error) => {
         console.log(error);
@@ -277,10 +277,10 @@ function updateEmployeeRole() {
               return;
             }
             console.log(`${res.affectedRows} employee updated!\n`);
+            return mainPrompt();
           });
         });
       });
     });
   });
 }
-mainPrompt();
